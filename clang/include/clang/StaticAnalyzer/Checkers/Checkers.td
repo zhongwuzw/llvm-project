@@ -259,6 +259,8 @@ def FixedAddressChecker : Checker<"FixedAddr">,
   HelpText<"Check for assignment of a fixed address to a pointer">,
   Documentation<HasAlphaDocumentation>;
 
+def MainCallChecker : Checker <"MainCall">, HelpText <"Check for calls to main">, Documentation<HasAlphaDocumentation>;
+  
 def PointerArithChecker : Checker<"PointerArithm">,
   HelpText<"Check for pointer arithmetic on locations other than array "
            "elements">,
