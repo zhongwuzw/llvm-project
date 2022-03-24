@@ -1,5 +1,6 @@
 //#include "ClangSACheckers.h"
 #include "clang/StaticAnalyzer/Checkers/BuiltinCheckerRegistration.h"
+#include "clang/StaticAnalyzer/Frontend/CheckerRegistry.h"
 #include "clang/StaticAnalyzer/Core/BugReporter/BugType.h"
 #include "clang/StaticAnalyzer/Core/Checker.h"
 #include "clang/StaticAnalyzer/Core/CheckerManager.h"
@@ -8,14 +9,14 @@
 using namespace clang;
 using namespace clang::ento;
 namespace {
-class MainCallChecker : public Checker<check::PreCall> {
+class CustomMainCallChecker : public Checker<check::PreCall> {
   mutable std::unique_ptr<BugType> BT;
 
 public:
   void checkPreCall(const CallEvent &Call, CheckerContext &C) const;
 };
 } // namespace
-void MainCallChecker::checkPreCall(const CallEvent &Call,
+void CustomMainCallChecker::checkPreCall(const CallEvent &Call,
                                    CheckerContext &C) const {
   if (const IdentifierInfo *II = Call.getCalleeIdentifier())
     if (II->isStr("main")) {
@@ -27,10 +28,18 @@ void MainCallChecker::checkPreCall(const CallEvent &Call,
       C.emitReport(std::move(Report));
     }
 }
-//void ento::registerMainCallChecker(CheckerManager &Mgr) {
-//  Mgr.registerChecker<MainCallChecker>();
+
+extern "C" const char clang_analyzerAPIVersionString[] =
+CLANG_ANALYZER_API_VERSION_STRING;
+
+extern "C" void clang_registerCheckers(CheckerRegistry &registry) {
+    registry.addChecker<CustomMainCallChecker>("alpha.core.MainCallChecker", "Checks for calls to main","for test");
+}
+
+//void ento::registerCustomMainCallChecker(CheckerManager &Mgr) {
+//  Mgr.registerChecker<CustomMainCallChecker>();
 //}
 //
-//bool ento::shouldRegisterMainCallChecker(const CheckerManager &mgr) {
+//bool ento::shouldRegisterCustomMainCallChecker(const CheckerManager &mgr) {
 //  return true;
 //}

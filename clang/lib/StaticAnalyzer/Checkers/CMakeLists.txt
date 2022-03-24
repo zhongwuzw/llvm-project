@@ -143,3 +143,5 @@ add_clang_library(clangStaticAnalyzerCheckers
   DEPENDS
   omp_gen
   )
+
+add_subdirectory(CustomCheckers)
