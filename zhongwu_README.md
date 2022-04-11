@@ -33,3 +33,10 @@
 
 # clang related analysis commands
 1. clang -cc1 -ast-dump test.c (dump the ast)
+2. See the cfg or exploded graph in MacOS, `brew install graphviz` and `dot -Tpng test.dot -o test.png`
+3. If we want to debug clang's static analyzer code, we need pass the analyzer-checker of the checker, like ```-cc1 -analyze -load libCustomCheckers.dylib  -fblocks  -verify -Wno-objc-root-class -analyzer-checker=osx.cocoa.MissingSuperCall  /Users/zhongwu/Documents/workspace/Example_Test.m```. OC static analyzer sample test code: https://github.com/zhongwuzw/llvm-project/blob/swift%2Frelease%2F5.6/clang/test/Analysis/superclass.m
+
+# clang static analyzer related documentation
+1. [ClangStaticAnalyzer](https://clang.llvm.org/docs/ClangStaticAnalyzer.html)
+2. https://llvm.org/devmtg/2008-08/Kremenek_StaticAnalyzer.pdf
+3. https://clang-analyzer.llvm.org/available_checks.html
