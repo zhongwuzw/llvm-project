@@ -30,6 +30,7 @@
 4. Switch to the `CustomChecker` schema and select executable to the builded `clang`, see [screenshot](https://raw.githubusercontent.com/zhongwuzw/llvm-project/swift/release/5.6/resources/checkerDylib.png)
 5. Add the [params](https://github.com/zhongwuzw/llvm-project/blob/swift/release/5.6/resources/checkerDylibRunParams.jpg?raw=true) to debug the checker. `-cc1 -analyze -load libCustomCheckers.dylib -analyzer-checker=alpha.core /Users/zhongwu/Documents/workspace/Example_Test.c`
 6. If we want to use checker in a project, we can create a xcconfig to use custom clang, like [xcconfig](https://github.com/zhongwuzw/llvm-project/blob/swift/release/5.6/resources/CustomCheckers.xcconfig). If we want to execute xcodebuild command, we can also use command like : `xcodebuild -xcconfig "xcconfigPath" .... analyze`
+7. If we add the new files, we don't need to execute ``cmake -G "Xcode" -DLLVM_ENABLE_PROJECTS=clang ..`` again, it's very slow, we can just use Xcode, right click to use "Add files to ...", then build again.
 
 # clang related analysis commands
 1. clang -cc1 -ast-dump test.c (dump the ast)
@@ -40,3 +41,4 @@
 1. [ClangStaticAnalyzer](https://clang.llvm.org/docs/ClangStaticAnalyzer.html)
 2. https://llvm.org/devmtg/2008-08/Kremenek_StaticAnalyzer.pdf
 3. https://clang-analyzer.llvm.org/available_checks.html
+4. https://clang.llvm.org/docs/analyzer/checkers.html#core-callandmessage-c-c-objc

@@ -3,6 +3,8 @@ IF (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 ENDIF()
 
 add_clang_library(CustomCheckers
+    CustomCheckersRegistry.cpp
     CustomMainCallChecker.cpp
+    ObjcUIViewControllerInitializeOverrideChecker.cpp
     SHARED
 )
