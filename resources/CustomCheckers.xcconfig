@@ -1,0 +1,3 @@
+CustomClang=/Users/zhongwu/Documents/workspace/llvm-project/llvm/build/Debug
+CLANG_ANALYZER_EXEC = $CustomClang/bin/clang
+CLANG_ANALYZER_OTHER_FLAGS = -load $CustomClang/lib/libCustomCheckers.dylib -analyzer-checker alpha.core
