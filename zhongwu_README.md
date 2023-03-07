@@ -42,3 +42,5 @@
 2. https://llvm.org/devmtg/2008-08/Kremenek_StaticAnalyzer.pdf
 3. https://clang-analyzer.llvm.org/available_checks.html
 4. https://clang.llvm.org/docs/analyzer/checkers.html#core-callandmessage-c-c-objc
+5. https://clang.llvm.org/docs/index.html
+6. There has tests of clang static analyzer in llvm-project/clang/test/Analysis directory.

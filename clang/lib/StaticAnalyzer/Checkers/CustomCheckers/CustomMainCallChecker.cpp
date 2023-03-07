@@ -1,10 +1,10 @@
 #include "BuiltinCheckerRegistration.h"
-#include "clang/StaticAnalyzer/Frontend/CheckerRegistry.h"
 #include "clang/StaticAnalyzer/Core/BugReporter/BugType.h"
 #include "clang/StaticAnalyzer/Core/Checker.h"
 #include "clang/StaticAnalyzer/Core/CheckerManager.h"
 #include "clang/StaticAnalyzer/Core/PathSensitive/CallEvent.h"
 #include "clang/StaticAnalyzer/Core/PathSensitive/CheckerContext.h"
+#include "clang/StaticAnalyzer/Frontend/CheckerRegistry.h"
 
 using namespace clang;
 using namespace clang::ento;
@@ -19,7 +19,7 @@ public:
 } // namespace
 
 void CustomMainCallChecker::checkPreCall(const CallEvent &Call,
-                                   CheckerContext &C) const {
+                                         CheckerContext &C) const {
   if (const IdentifierInfo *II = Call.getCalleeIdentifier())
     if (II->isStr("main")) {
       if (!BT)
@@ -32,10 +32,9 @@ void CustomMainCallChecker::checkPreCall(const CallEvent &Call,
 }
 
 void ento::registerCustomMainCallChecker(CheckerManager &Mgr) {
-    Mgr.registerChecker<CustomMainCallChecker>();
+  Mgr.registerChecker<CustomMainCallChecker>();
 }
 
-bool ento::shouldRegisterCustomMainCallChecker(
-                                                        const CheckerManager &mgr) {
-    return true;
+bool ento::shouldRegisterCustomMainCallChecker(const CheckerManager &mgr) {
+  return true;
 }
